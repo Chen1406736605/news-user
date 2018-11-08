@@ -9,12 +9,40 @@ import {
   Tabbar,
   TabbarItem,
   Search,
+  Tabs,
+  Tab,
+  NavBar,
+  PullRefresh,
+  List,
+  Cell,
+  Icon,
+  Popup,
+  CellGroup,
+  Loading,
+  Row,
+  Col,
+  Field,
+  Uploader
 } from 'vant';
 
 Vue.use(Button)
 Vue.use(Tabbar)
 Vue.use(TabbarItem)
 Vue.use(Search)
+Vue.use(Tabs)
+Vue.use(Tab)
+Vue.use(NavBar)
+Vue.use(PullRefresh)
+Vue.use(List)
+Vue.use(Cell)
+Vue.use(Icon)
+Vue.use(Popup)
+Vue.use(CellGroup)
+Vue.use(Loading)
+Vue.use(Row)
+Vue.use(Col)
+Vue.use(Field)
+Vue.use(Uploader)
 Vue.config.productionTip = false
 
 new Vue({

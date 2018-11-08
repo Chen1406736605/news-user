@@ -8,6 +8,9 @@
   
   export default {
     name: 'app',
+    mounted() {
+      this.$router.push("/")
+    }
   }
 </script>
 
