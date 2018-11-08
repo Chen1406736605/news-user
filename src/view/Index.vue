@@ -10,12 +10,14 @@
         <br>
         <span style="font-family: 'Harlow Solid Italic';
         font-size: large;">选择你喜欢的频道</span>
-        <br><br>
-        <van-button type="default">类型</van-button>&nbsp;&nbsp;
-        <van-button type="default">类型</van-button>
-        <br><br>
-        <van-button type="default">类型</van-button>&nbsp;&nbsp;
-        <van-button type="default">类型</van-button>
+        <br><br><br>
+        <van-cell-group>
+          <van-cell v-for="item in channel_name"
+                    clickable
+                    @click="btn_chooseType(item.type)"
+                    :key="item.id"
+                    :title="item.typeName"/>
+        </van-cell-group>
         <br>
       </div>
     </van-popup>
@@ -25,7 +27,7 @@
     <van-tabbar v-model="active">
       <van-tabbar-item @click="btn_home" icon="home" info="10">首页</van-tabbar-item>
       <van-tabbar-item @click="btn_release" icon="add-o" dot>发布</van-tabbar-item>
-      <van-tabbar-item @click="btn_me" icon="contact">我的</van-tabbar-item>
+      <van-tabbar-item @click="btn_me" icon="contact">{{ indexTabbar }}</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -36,8 +38,9 @@
     data() {
       return {
         active: 0,
-        value: null,
         menu_visible: false,
+        channel_name: [],
+        indexTabbar: '未登录'
       }
     },
     methods: {
@@ -55,12 +58,24 @@
       },
   
       btn_me() {
-        this.$router.push('/me')
+        // this.$router.push('/me')
+        this.$router.push('/login')
+      },
+      
+      channel_init() {
+        this.axios.get('system-init/channel')
+          .then(res => {
+            this.channel_name = res.data
+          })
+      },
+  
+      btn_chooseType(type) {
+        this.menu_visible = false;
       }
       
     },
     mounted() {
-    
+      this.channel_init()
     }
   }
 </script>

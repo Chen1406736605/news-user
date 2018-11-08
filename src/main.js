@@ -3,7 +3,6 @@ import App from './App.vue'
 import axios from './config/axios'
 import router from './config/router'
 import store from './config/store'
-
 import {
   Button,
   Tabbar,
@@ -22,9 +21,9 @@ import {
   Row,
   Col,
   Field,
-  Uploader
+  Uploader,
+  Tag
 } from 'vant';
-
 Vue.use(Button)
 Vue.use(Tabbar)
 Vue.use(TabbarItem)
@@ -43,7 +42,9 @@ Vue.use(Row)
 Vue.use(Col)
 Vue.use(Field)
 Vue.use(Uploader)
+Vue.use(Tag)
 Vue.config.productionTip = false
+Vue.prototype.axios = axios
 
 new Vue({
   axios,

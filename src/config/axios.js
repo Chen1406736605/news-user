@@ -1,6 +1,7 @@
-import axios from 'axios'
+import axios from 'axios';
 
-axios.defaults.baseUrl = '/api/v1'
+axios.defaults.baseURL = '/api/v1';
+axios.defaults.timeout = 5000;
 
 axios.interceptors.request.use(
   config => {
@@ -15,11 +16,11 @@ axios.interceptors.response.use(
   response => {
     return response;
   },
-  
+
   error => {
     // this.$message.error(error.response.data.message)
     return error
   }
 )
 
-export default axios
+export default axios;

@@ -10,7 +10,8 @@ export default new Router({
     children: [
       {path: '/', component: () => import('../view/Home.vue')},
       {path: '/release', component: () => import('../view/Release.vue')},
-      {path: '/me', component: () => import('../view/Me.vue')}
+      {path: '/me', component: () => import('../view/Me.vue')},
+      {path: '/login', component: () => import('../view/Login.vue')}
     ]}
   ]
 })
