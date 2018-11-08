@@ -23,8 +23,22 @@
         placeholder="请输入密码"
       />
     </van-cell-group>
+    <br><br><br>
+    <van-button type="default"
+                @click="btn_login"
+                style="color: #0092f2; width: 200px;" round>登 录</van-button>
     <br><br>
-    <van-button type="default" style="color: #0092f2; width: 200px;" round>登 录</van-button>
+    <van-row>
+      <a style="font-size: x-small; color: #0092f2;" href="#">注册账号</a>
+      <div style="display: inline-block; width: 18px; height: 10px;">
+        <div style="display: inline-block; height: 10px; width: 1px; background-color: darkgrey;"></div>
+      </div>
+      <a style="font-size: x-small; color: #0092f2;" href="#">忘记密码</a>
+    </van-row>
+  
+    <van-popup v-model="isLoading_Login" style="border-radius: 15px; background-color: black;">
+      <van-loading color="write"/>
+    </van-popup>
   </div>
 </template>
 
@@ -36,13 +50,18 @@
         loginForm: {
           username: null,
           password: null
-        }
+        },
+        isLoading_Login: false,
       }
     },
     
     methods: {
       login_back() {
       
+      },
+  
+      btn_login() {
+        this.isLoading_Login = true;
       }
     }
   }
