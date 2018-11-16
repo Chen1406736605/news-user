@@ -1,34 +1,21 @@
 <template>
   <div id="index">
-    <van-nav-bar fixed title="新闻" left-arrow>
-      <van-icon @click="show_menu" name="wap-nav" slot="left" />
-      <van-icon name="search" slot="right" />
-    </van-nav-bar>
+    <mt-header style="background-color: #26a2ff;" fixed title="固定在顶部"></mt-header>
     
-    <van-popup v-model="menu_visible" position="left">
-      <div style="height: 100vh; width: 66vw;">
-        <br>
-        <span style="font-family: 'Harlow Solid Italic';
-        font-size: large;">选择你喜欢的频道</span>
-        <br><br><br>
-        <van-cell-group>
-          <van-cell v-for="item in channel_name"
-                    clickable
-                    @click="btn_chooseType(item.type)"
-                    :key="item.id"
-                    :title="item.typeName"/>
-        </van-cell-group>
-        <br>
-      </div>
-    </van-popup>
-    
-    <router-view/>
-    
-    <van-tabbar v-model="active">
-      <van-tabbar-item @click="btn_home" icon="home" info="10">首页</van-tabbar-item>
-      <van-tabbar-item @click="btn_release" icon="add-o" dot>发布</van-tabbar-item>
-      <van-tabbar-item @click="btn_me" icon="contact">{{ indexTabbar }}</van-tabbar-item>
-    </van-tabbar>
+    <mt-tabbar v-model="selected">
+      <mt-tab-item id="首页">
+        <img slot="icon" src="../assets/tabbar/home-unactive.png">
+        首页
+      </mt-tab-item>
+      <mt-tab-item id="发现">
+        <img slot="icon" src="../assets/tabbar/add-unactive.png">
+        发布
+      </mt-tab-item>
+      <mt-tab-item id="我的">
+        <img slot="icon" src="../assets/tabbar/me-unactive.png">
+        我的
+      </mt-tab-item>
+    </mt-tabbar>
   </div>
 </template>
 
@@ -37,30 +24,10 @@
     name: "Index",
     data() {
       return {
-        active: 0,
-        menu_visible: false,
-        channel_name: [],
-        indexTabbar: '未登录'
+        selected: null
       }
     },
     methods: {
-  
-      show_menu() {
-        this.menu_visible = true;
-      },
-  
-      btn_home() {
-        this.$router.push('/')
-      },
-  
-      btn_release() {
-        this.$router.push('/release')
-      },
-  
-      btn_me() {
-        // this.$router.push('/me')
-        this.$router.push('/login')
-      },
       
       channel_init() {
         this.axios.get('system-init/channel')
@@ -68,14 +35,10 @@
             this.channel_name = res.data
           })
       },
-  
-      btn_chooseType(type) {
-        this.menu_visible = false;
-      }
       
     },
     mounted() {
-      this.channel_init()
+      // this.channel_init()
     }
   }
 </script>
