@@ -1,20 +1,14 @@
 <template>
   <div id="index">
-    <mt-header style="background-color: #26a2ff;" fixed title="固定在顶部"></mt-header>
-  
-    <!--<mt-tab-container style="margin-top: 33px;" v-model="navbar_itemValue">-->
-      <!--<mt-tab-container-item id="tab-container1">-->
-        <!--<mt-cell v-for="n in 10" :key="n.id" title="tab-container 1"></mt-cell>-->
-      <!--</mt-tab-container-item>-->
-      <!--<mt-tab-container-item id="tab-container2">-->
-        <!--<mt-cell v-for="n in 5" :key="n.id" title="tab-container 2"></mt-cell>-->
-      <!--</mt-tab-container-item>-->
-      <!--<mt-tab-container-item id="tab-container3">-->
-        <!--<mt-cell v-for="n in 7" :key="n.id" title="tab-container 3"></mt-cell>-->
-      <!--</mt-tab-container-item>-->
-    <!--</mt-tab-container>-->
+    <mt-header fixed title="新闻头条">
+      <mt-button
+        @click="btn_more"
+        icon="more"
+        slot="left"></mt-button>
+      <mt-button icon="search" slot="right"></mt-button>
+    </mt-header>
     
-    <mt-tabbar fixed>
+    <mt-tabbar fixed v-model="selected_index_tabbar">
       <mt-tab-item id="首页" @click.native="btn_home">
         <img slot="icon" :src="Icon_home">
         首页
@@ -28,6 +22,20 @@
         我的
       </mt-tab-item>
     </mt-tabbar>
+    
+    <mt-popup
+      position="left"
+      v-model="channelVisible">
+      <div style="height: 100vh; width: 70vw;">
+        <mt-header fixed title="频道选择"></mt-header>
+        <br><br><br>
+        <div v-for="item in 10" :key="item.id">
+          <mt-button style="width: 200px;">btn_{{item}}</mt-button>
+          <br><br>
+        </div>
+      </div>
+    </mt-popup>
+    
   </div>
 </template>
 
@@ -39,33 +47,45 @@
   
         navbar_itemValue: null,
   
-        Icon_home: require('../assets/tabbar/home-unactive.png'),
-        Icon_add: require('../assets/tabbar/add-unactive.png'),
-        Icon_me: require('../assets/tabbar/me-unactive.png'),
+        Icon_home: require('../assets/images/tabbar/home-unactive.png'),
+        Icon_add: require('../assets/images/tabbar/add-unactive.png'),
+        Icon_me: require('../assets/images/tabbar/me-unactive.png'),
+  
+        selected_index_tabbar: null,
+  
+        channelVisible: false
   
       }
     },
     methods: {
+      
+      btn() {
+        this.channelVisible = false;
+      },
+  
+      btn_more() {
+        this.channelVisible = true;
+      },
   
       btn_home() {
         this.resetIcon();
-        this.Icon_home = require('../assets/tabbar/home-active.png');
+        this.Icon_home = require('../assets/images/tabbar/home-active.png');
       },
   
       btn_add() {
         this.resetIcon();
-        this.Icon_add = require('../assets/tabbar/add-active.png');
+        this.Icon_add = require('../assets/images/tabbar/add-active.png');
       },
   
       btn_me() {
         this.resetIcon();
-        this.Icon_me = require('../assets/tabbar/me-active.png');
+        this.Icon_me = require('../assets/images/tabbar/me-active.png');
       },
       
       resetIcon() {
-          this.Icon_home = require('../assets/tabbar/home-unactive.png'),
-          this.Icon_add = require('../assets/tabbar/add-unactive.png'),
-          this.Icon_me = require('../assets/tabbar/me-unactive.png')
+          this.Icon_home = require('../assets/images/tabbar/home-unactive.png'),
+          this.Icon_add = require('../assets/images/tabbar/add-unactive.png'),
+          this.Icon_me = require('../assets/images/tabbar/me-unactive.png')
       }
       
     },
